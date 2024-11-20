@@ -1,0 +1,122 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+.card {
+    margin-bottom: 16px;
+}
+
+.HomeCard {
+    margin-top: 16px;
+}
+
+.outerCard {
+    padding: 30px;
+}
+
+.headerText {
+    margin-top: 220px;
+    margin-right: 400px;
+    padding: 5px;
+    border-radius: 7px;
+    background-color: rgba(224, 8, 8, 0.5);
+}
+
+.move20Up {
+    margin-top: -20px;
+}
+
+.move20Down {
+    margin-top: 20px;
+}
+
+.move20Right {
+    margin-left: 20px;
+}
+
+.h1Aligner {
+    margin-left: -8px;
+}
+
+.flex {
+    margin-top: -20px;
+    display: flex;
+    align-items: center;
+}
+
+.h4FlexText {
+    margin: 0;
+}
+
+.isSuccesForHomeMsg {
+    padding: 0;
+    margin-left: 110px;
+    margin-bottom: -10px;
+    margin-top: 9px;
+}
+
+.flexButton {
+    margin-left: auto;
+    margin-bottom: 10px;
+}
+
+.smallImg {
+    margin-right: 3px;
+    width: 28px;
+    height: auto;
+}
+
+.mediumImg {
+    height: 150px;
+    overflow: hidden;
+}
+
+.inputWidth400 {
+    width: 400px;
+}
+
+.loginButtonWidth {
+    width: 106.39px;
+}
+
+.crudButton {
+    margin: 5px;
+    padding: 4px;
+}
+
+.noBullets {
+    list-style-type: none;
+    padding: 0;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #E60023 !important;
+    border-color: #00942A !important;
+}
+
+.validation-summary-errors {
+    color: #E33545;
+    border: 1px solid #5CBA30;
+    border-radius: 10px;
+    width: 370px;
+    padding: 3px;
+}
+
+    .validation-summary-errors ul {
+        margin: 0;
+    }
