@@ -1,0 +1,38 @@
+﻿@model UserRegisterModel
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewData["Title"] = "Registreren";
+}
+
+<div class="h1Aligner">
+    <h1>@ViewData["Title"]</h1>
+    <div class="card w-95">
+        <div class="card-body">
+            <p class="card-text">
+                <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+                <form asp-action="Register" asp-controller="Account" method="post">
+                    <div class="form-group">
+                        <label asp-for="Name">Naam</label>
+                        <div><span asp-validation-for="Name" class="text-danger"></span></div>
+                        <input asp-for="Name" class="form-control inputWidth400" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password">Wachtwoord</label>
+                        <div><span asp-validation-for="Password" class="text-danger"></span></div>
+                        <input asp-for="Password" class="form-control inputWidth400" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword">Bevestig wachtwoord</label>
+                        <div><span asp-validation-for="ConfirmPassword" class="text-danger"></span></div>
+                        <input asp-for="ConfirmPassword" class="form-control inputWidth400" />
+                    </div>
+                    <button class="btn btn-primary move20Down" type="submit">Aanmelden</button>
+                    <div class="form-group move20Down">
+                        <label>Al een bestaande account bij Avans? <a asp-controller="Account" asp-action="Login">Log in.</a></label>
+                    </div>
+                </form>
+            </p>
+        </div>
+    </div>
+</div>

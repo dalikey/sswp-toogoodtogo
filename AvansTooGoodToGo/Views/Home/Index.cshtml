@@ -1,0 +1,46 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="bg-image d-flex justify-content-center align-items-center"
+     style="
+    background-image: url('/img/kantine.png');
+    height: 44vh;
+  ">
+    <h1 class="text-white headerText">Welkom bij Avans Too Good To Go</h1>
+
+</div>
+<div class="row col d-flex justify-content-center">
+    <div class="col-sm-5 HomeCard d-flex align-items-stretch">
+        <div class="card">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Pakketten</h5>
+                @if (SignInManager.IsSignedIn(User)) {
+                    @if (User.HasClaim("CanteenEmployee", "true")) {
+                        <p class="card-text mb-4">Welkom! Bekijk hier alle pakketten die u kunt bewerken en verwijderen. Je kunt hier ook een pakket toevoegen en informatie inzien.</p>
+                        <a asp-controller="Package" asp-action="List" class="btn btn-primary mt-auto align-self-start">Naar pakketten</a>
+                    } else {
+                        <p class="card-text mb-4">Welkom! Bekijk hier uw aangeboden en gereserveerde pakketten.</p>
+                        <a asp-controller="Package" asp-action="StartAtRecommended" class="btn btn-primary mt-auto align-self-start">Naar pakketten</a>
+                    }
+                } else {
+                    <p class="card-text mb-4">Bekijk hier uw aangeboden en gereserveerde pakketten. Voor de gereserveerde pakketten moet je wel ingelogd zijn.</p>
+                    <a asp-controller="Package" asp-action="Index" class="btn btn-primary mt-auto align-self-start">Naar pakketten</a>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-5 HomeCard d-flex align-items-stretch">
+        <div class="card">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Over Avans</h5>
+                <p class="card-text mb-4">Avans Too Good To Go, een site waar studenten pakketten kunnen reserveren. Meer informatie over Avans vind je hier.</p>
+                <a asp-action="AboutAvans" class="btn btn-primary mt-auto align-self-start">Naar over Avans</a>
+            </div>
+        </div>
+    </div>
+</div>

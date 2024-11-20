@@ -1,0 +1,23 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<li class="nav-item dropdown">
+    <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Pakketten
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        @if (SignInManager.IsSignedIn(User)) {
+            @if (User.HasClaim("CanteenEmployee", "true")) {
+                <li><a class="dropdown-item" asp-area="" asp-controller="Package" asp-action="List">Alle Pakketten</a></li>
+                <li><a class="dropdown-item" asp-area="" asp-controller="Package" asp-action="CanteenEmployeeLocationOverview">Eigen locatie pakketten</a></li>
+            } else {
+                <li><a class="dropdown-item" asp-area="" asp-controller="Package" asp-action="StartAtRecommended">Aanbevolen pakketten</a></li>
+                <li><a class="dropdown-item" asp-area="" asp-controller="Package" asp-action="StudentReserved">Gereserveerde pakketten</a></li>
+            }
+        } else {
+            <li><a class="dropdown-item" asp-area="" asp-controller="Package" asp-action="Index">Aanbevolen pakketten</a></li>
+            <li><a class="dropdown-item" asp-area="" asp-controller="Package" asp-action="StudentReserved">Gereserveerde pakketten</a></li>
+        }
+    </ul>
+</li>

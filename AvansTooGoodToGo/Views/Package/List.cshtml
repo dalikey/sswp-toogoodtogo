@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "Pakketten";
+}
+
+@model IEnumerable<Package>
+
+<div>
+    <h1>Pakketten</h1>
+    <h5 class="text-danger">@TempData["ResultMessage"]</h5>
+    <h5 class="text-success">@TempData["IsSuccessMessage"]</h5>
+    <div class="card outerCard">
+        <div class="row">
+            <div class="flex">
+                <h4 class="h4FlexText">@ViewData["Status"] @ViewData["Title"]</h4>
+                <div class="dropdown move20Right">
+                    <button class="btn border-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Locatie
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" asp-action="List">Alle locaties</a></li>
+                        <li><a class="dropdown-item" asp-action="CanteenEmployeeLocationOverview">Eigen Locatie Pakketten</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown move20Right">
+                    <button class="btn border-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Reservingen van studenten
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" asp-action="AllReserved">Reservingen van studenten</a></li>
+                    </ul>
+                </div>
+                <a class="btn btn-primary flexButton" asp-action="NewPackage">Nieuw pakket toevoegen</a>
+            </div>
+            @if (Model != null) {
+                @if (@Model.Count() == 0) {
+                    <p>Er zijn geen pakketten meer beschikbaar.</p>
+                }
+                @foreach (var package in @Model) {
+                    <div class="col-lg-3 col-md-6 col-sm-6 mb-3 d-flex align-items-stretch">
+                        <div class="card">
+                            <img src="https://cdn.britannica.com/36/123536-050-95CB0C6E/Variety-fruits-vegetables.jpg" class="card-img-top" alt="Card Image">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">
+                                    @package.Name
+                                    @if (@package.IsEighteenPlus) {
+                                        <img src='/img/18.png' class="rounded float-start smallImg" alt="18+">
+                                    }
+                                </h5>
+                                <ul class="noBullets">
+                                    <li>Locatie: @package.CityEnum.ToString().Replace("_", " "), @package.CanteenLocationEnum</li>
+                                    <li>Ophaaldatum: @($"{@package.PickupDate:dd-MM-yyyy HH:mm}")</li>
+                                    <li>Aantal producten: @package.Products.Count</li>
+                                    <li>Sluitingstijd: @($"{@package.EndOfPickupTime:HH:mm}")</li>
+                                    <li>Kantinemedewerker: @(@package.Canteen?.CanteenEmployee.Name ?? "Kantinemedewerker is niet opgegeven")</li>
+                                    <li>Gereserveerd door: @(@package.ReservedBy?.Name ?? "Dit pakket is niet gereserveerd")</li>
+                                    <li>Prijs: €@package.Price</li>
+                                    <li>Maaltijd type: @package.MealType</li>
+                                    <li><a asp-action="Detail" asp-route-Id="@package.Id">Klik hier voor meer details.</a></li>
+                                </ul>
+                                <div class="d-flex">
+                                    <a asp-controller="Package" asp-action="Delete" asp-route-Id="@package.Id" class="btn btn-primary crudButton">Pakket verwijderen</a>
+                                    <a asp-controller="Package" asp-action="UpdatePackage" asp-route-Id="@package.Id" class="btn btn-primary crudButton">Pakket bewerken</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>

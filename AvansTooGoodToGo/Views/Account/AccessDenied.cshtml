@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<div class="h1Aligner">
+    <h1>Toegang</h1>
+    <div class="card w-95">
+        <div class="card-body">
+            @if (SignInManager.IsSignedIn(User)) {
+                @if (User.HasClaim("CanteenEmployee", "true")) {
+                    <h4>Alleen toegangelijk voor studenten</h4>
+
+                } else {
+                    <h4>Alleen toegangelijk voor medewerkers</h4>
+                }
+            } else {
+                <h4>Alleen toegangelijk voor ingelogden</h4>
+            }
+            <p class="card-text">
+                Sorry, deze pagina is niet toegankelijk voor uw rol. Als dat niet het geval was neem contact op met Avans.
+            </p>
+        </div>
+    </div>
+</div>

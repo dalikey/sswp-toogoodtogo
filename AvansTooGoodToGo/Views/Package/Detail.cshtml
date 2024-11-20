@@ -1,0 +1,56 @@
+﻿@model Package
+
+<div>
+    <h1>Pakket info</h1>
+    <div class="card outerCard">
+        <div class="row">
+            <div class="flex">
+                <h4>
+                    Pakket @Model.Name
+                    @if (@Model.IsEighteenPlus) {
+                        <img src='/img/18.png' class="rounded float-start smallImg" alt="18+">
+                    }
+                </h4>
+                @if (User.HasClaim("CanteenEmployee", "true")) {
+                    <a class="btn btn-primary flexButton" asp-action="List">Terug naar pakketten</a>
+                } else {
+                    <a class="btn btn-primary flexButton" asp-action="Index">Terug naar pakketten</a>
+                }
+            </div>
+            <div class="row">
+                <div class="col-6 col-md-4">
+                    <ul class="noBullets">
+                        <li>Locatie: @Model.CityEnum, @Model.CanteenLocationEnum</li>
+                        <li>Ophaaldatum: @($"{@Model.PickupDate:dd-MM-yyyy HH:mm}")</li>
+                        <li>Sluitingstijd: @($"{@Model.EndOfPickupTime:HH:mm}")</li>
+                        <li>Kantinemedewerker: @(@Model.Canteen?.CanteenEmployee.Name ?? "Kantinemedewerker is niet opgegeven")</li>
+                        <li>Gereserveerd door: @(@Model.ReservedBy?.Name ?? "Dit pakket is niet gereserveerd")</li>
+                        <li>Prijs: €@Model.Price</li>
+                        <li>Maaltijd type: @Model.MealType</li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-8">
+                    Producten:
+                    <div class="row">
+                        @foreach (var product in @Model.Products) {
+                            <div class="col-6 col-md-4">
+                                <div class="card">
+                                    <img src="@product.ImageUrl" class="card-img-top mediumImg" alt="@product.Name">
+                                    <ul class="noBullets">
+                                        <li>@product.Name</li>
+                                        @if (@product.ContainsAlcohol) {
+                                            <img src='/img/18.png' class="rounded float-start smallImg" alt="18+">
+                                            <p>Product bevat alcohol.</p>
+                                        } else {
+                                            <p>Product bevat geen alcohol.</p>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
