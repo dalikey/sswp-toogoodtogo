@@ -2,6 +2,8 @@
 
 Dit project is een serverside toepassing ontwikkeld in **C# (.NET Framework)** en gehost op **Azure**. Het ontwerp volgt de **Onion Architecture** om een modulaire en schaalbare codebasis te garanderen. Er is ook onderzoek gedaan naar het gebruik van **GraphQL** en **Swagger** om het begrip ervan te verbeteren.
 
+![TooGoodToGo Screenshot](./sswp-tgtg.png)
+
 ## Systeemoverzicht
 
 ### Actoren:
